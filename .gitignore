@@ -1,7 +1,3 @@
-__pycache__/
-*.py[cod]
-*.pkl
-
 # Virtual environments
 .venv/
 venv/
@@ -24,5 +20,3 @@ logs/
 *.egg-info/
 dist/
 build/
-
-"model/" 
