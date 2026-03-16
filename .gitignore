@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.pkl
+
+# Virtual environments
+.venv/
+venv/
+env/
+# OS files
+*.DS_Store
+Thumbs.db
+# Data
+data/
+*.csv
+*.tsv
+*.xlsx
+*.jsonl
+
+# Logs
+logs/
+*.log
+
+# Docker / Python cache
+*.egg-info/
+dist/
+build/
+
