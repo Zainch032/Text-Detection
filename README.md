@@ -7,6 +7,8 @@ sdk: docker
 pinned: false
 ---
 
+hf
+
 ## Text Detection NLP App
 
 This project is an end-to-end NLP pipeline for hate/offensive language detection. It includes **data cleaning**, **exploratory data analysis (EDA)**, **model training**, and **deployment of an NLP classifier** as a web app.
@@ -41,7 +43,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-4. Open `http://127.0.0.1:5000` in your browser.
+4. Open `http://127.0.0.1:7860` in your browser.
 
 ## Docker Usage
 
@@ -54,10 +56,10 @@ docker build -t text-detection-app .
 2. **Run the container**:
 
 ```bash
-docker run -p 5000:5000 text-detection-app
+docker run -p 7860:7860 text-detection-app
 ```
 
-3. Open `http://127.0.0.1:5000` and use the web UI to test the text detection model.
+3. Open `http://127.0.0.1:7860` and use the web UI to test the text detection model.
 
 ##### Live at :
 
@@ -66,17 +68,16 @@ docker run -p 5000:5000 text-detection-app
 
 #### Folder Structure :
     
-    ├── app/                       
-│   ├── model/                   
-│   │   ├── svc.pkl           
-│   │   └── tfidf_vectorizer.pkl 
-│   ├── static/styles.css     
-│   ├── templates/index.html    
-│   ├── requirements.txt       
-│   └── app.py                 
-├── data/                      
-│   ├── dataset.csv            
-│   └── training_data.csv     
-├── notebooks/                  
-│   └── model_training.ipynb   
-└── deployment_link
+    ├── app.py
+    ├── model/
+    │   ├── svc.pkl
+    │   └── tfidf_vectorizer.pkl
+    ├── static/
+    │   └── style.css
+    ├── templates/
+    │   └── index.html
+    ├── requirements.txt
+    ├── Dockerfile
+    ├── notebooks/
+    │   └── model_training.ipynb
+    └── data/  (ignored by git)

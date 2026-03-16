@@ -12,5 +12,5 @@ COPY . /app
 
 EXPOSE 7860
 
-CMD ["gunicorn", "-b", "0.0.0.0:7860", "app:app"]
+CMD ["sh", "-c", "gunicorn -b 0.0.0.0:${PORT:-7860} app:app"]
 
