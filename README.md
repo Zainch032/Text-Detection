@@ -93,6 +93,10 @@ docker run -p 7860:7860 text-detection-app
 
   https://zainch12.pythonanywhere.com/
 
+##### Live demo (Hugging Face Spaces):
+
+  https://huggingface.co/spaces/Zainch032/Text-Detection
+
 
 #### Folder Structure :
     
