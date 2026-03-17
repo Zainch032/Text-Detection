@@ -1,20 +1,20 @@
-<<<<<<< HEAD
+############################################
+# Project ignores
+############################################
+
+# Local-only script
+upload.py
+
 # Python bytecode / caches
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
-=======
-__pycache__/
-*.py[cod]
-*.pkl
->>>>>>> d6832e31e439072de081850002c54f6902723475
-upload.py
+
 # Virtual environments
 .venv/
 venv/
 env/
-<<<<<<< HEAD
 
 # IDE / editor
 .vscode/
@@ -27,39 +27,25 @@ Thumbs.db
 # Jupyter (keep notebooks tracked, ignore checkpoints only)
 .ipynb_checkpoints/
 
-# Data
+# Data (keep datasets out of git)
 data/
 datasets/
-=======
-# OS files
-*.DS_Store
-Thumbs.db
-# Data
-data/
->>>>>>> d6832e31e439072de081850002c54f6902723475
 *.csv
 *.tsv
 *.xlsx
 *.jsonl
-<<<<<<< HEAD
 *.parquet
 *.feather
 *.pqt
 *.zip
 *.7z
 *.rar
-=======
->>>>>>> d6832e31e439072de081850002c54f6902723475
 
 # Logs
 logs/
 *.log
 
-# Docker / Python cache
+# Python packaging / build artifacts
 *.egg-info/
 dist/
 build/
-<<<<<<< HEAD
-=======
-
->>>>>>> d6832e31e439072de081850002c54f6902723475
