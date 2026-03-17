@@ -1,16 +1,38 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
 # Virtual environments
 .venv/
 venv/
 env/
+
+# IDE / editor
+.vscode/
+.idea/
+
 # OS files
 *.DS_Store
 Thumbs.db
+
+# Jupyter (keep notebooks tracked, ignore checkpoints only)
+.ipynb_checkpoints/
+
 # Data
 data/
+datasets/
 *.csv
 *.tsv
 *.xlsx
 *.jsonl
+*.parquet
+*.feather
+*.pqt
+*.zip
+*.7z
+*.rar
 
 # Logs
 logs/

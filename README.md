@@ -13,6 +13,16 @@ hf
 
 This project is an end-to-end NLP pipeline for hate/offensive language detection. It includes **data cleaning**, **exploratory data analysis (EDA)**, **model training**, and **deployment of an NLP classifier** as a web app.
 
+## What this “chatbot” does
+
+You type a message into the web UI, and the app returns a **single classification label**:
+
+- **Hate Speech**
+- **Offensive Language**
+- **Neither**
+
+Under the hood it is a classic NLP classifier: **TF‑IDF vectorizer → SVC model**.
+
 ## Features
 
 - **Data cleaning**: text normalization (lowercasing, punctuation/whitespace handling, basic noise removal).
@@ -20,6 +30,24 @@ This project is an end-to-end NLP pipeline for hate/offensive language detection
 - **Modeling**: TF-IDF vectorization with an SVC classifier (serialized with `joblib` and loaded at inference time).
 - **Web UI**: simple Flask interface where users can input text and get predictions (Hate Speech, Offensive Language, Neither).
 - **Deployment ready**: containerized with Docker for reproducible deployment.
+
+## Preprocessing (training + inference)
+
+During training (see `notebooks/model_training.ipynb`), text is cleaned before vectorization. Typical steps used in this project:
+
+- **Lowercasing**
+- **Whitespace normalization** (remove extra spaces/newlines)
+- **Noise removal** (basic punctuation/special-character cleanup depending on dataset)
+
+The trained **TF‑IDF vectorizer** (`model/tfidf_vectorizer.pkl`) must be used at inference time to transform user input in the same way training features were created.
+
+## How deployment works
+
+- The Flask app (`app.py`) loads:
+  - `model/svc.pkl`
+  - `model/tfidf_vectorizer.pkl`
+- It transforms the user text using TF‑IDF and predicts a label with the SVC model.
+- Docker runs the app with **gunicorn** and binds to **port 7860** (or `$PORT` if provided by the host).
 
 ## Tech Stack
 
