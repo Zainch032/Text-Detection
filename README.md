@@ -1,155 +1,90 @@
+# ⚡ Text Detection: Hate Speech & Offensive Language Classifier
+
+This project is an end-to-end NLP solution designed to detect and categorize harmful content in text. By leveraging machine learning, it provides an automated way to monitor online discourse, ensuring safer digital environments.
+
+
+
+### 🌐 [Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/Zainch032/Text-Detection)
+
 ---
-title: Text Detection
-emoji: ⚡
-colorFrom: yellow
-colorTo: gray
-sdk: docker
-pinned: false
+
+## 🚀 The Problem & Solution
+
+**The Problem:** Manual moderation of social media, comments, and forums is impossible at scale. Distinguishing between genuine "Hate Speech," "Offensive Language," and "Neutral" text is nuanced and context-dependent.
+
+**The Solution:** This app provides a real-time classification tool. By using a **Supportive Vector Classifier (SVC)** paired with **TF-IDF vectorization**, the system identifies linguistic patterns associated with harmful behavior, allowing platforms to flag or filter content instantly.
+
 ---
 
-<<<<<<< HEAD
-hf
+## 🛠️ Data Preprocessing & Accuracy Boost
 
-=======
->>>>>>> d6832e31e439072de081850002c54f6902723475
-## Text Detection NLP App
+To ensure the model focuses on the *meaning* of the text rather than digital noise, we implemented a rigorous preprocessing pipeline. This was critical for improving the F1-score and overall accuracy:
 
-This project is an end-to-end NLP pipeline for hate/offensive language detection. It includes **data cleaning**, **exploratory data analysis (EDA)**, **model training**, and **deployment of an NLP classifier** as a web app.
+1.  **Noise Removal:** Stripping out URLs, HTML tags, and special characters that don't contribute to sentiment.
+2.  **Normalization:** Converting all text to lowercase to ensure `Hate` and `hate` are treated identically.
+3.  **Tokenization & Cleaning:** Removing extra whitespace and stop words that dilute the model's focus.
+4.  **TF-IDF Vectorization:** We used **Term Frequency-Inverse Document Frequency** to weigh unique, meaningful words more heavily than common filler words.
 
-<<<<<<< HEAD
-## What this “chatbot” does
 
-You type a message into the web UI, and the app returns a **single classification label**:
 
-- **Hate Speech**
-- **Offensive Language**
-- **Neither**
+---
 
-Under the hood it is a classic NLP classifier: **TF‑IDF vectorizer → SVC model**.
+## 🏗️ Tech Stack
 
-=======
->>>>>>> d6832e31e439072de081850002c54f6902723475
-## Features
+| Layer | Technology |
+| :--- | :--- |
+| **Machine Learning** | Python, Scikit-Learn, Pandas, Numpy |
+| **NLP Techniques** | TF-IDF Vectorization, Text Normalization |
+| **Model** | Support Vector Classifier (SVC) |
+| **Web Framework** | Flask (Jinja2 Templates) |
+| **Deployment** | Docker, Gunicorn, Hugging Face Spaces |
 
-- **Data cleaning**: text normalization (lowercasing, punctuation/whitespace handling, basic noise removal).
-- **EDA**: label distribution, text length exploration, and qualitative inspection of examples to understand the dataset.
-- **Modeling**: TF-IDF vectorization with an SVC classifier (serialized with `joblib` and loaded at inference time).
-- **Web UI**: simple Flask interface where users can input text and get predictions (Hate Speech, Offensive Language, Neither).
-- **Deployment ready**: containerized with Docker for reproducible deployment.
+---
 
-<<<<<<< HEAD
-## Preprocessing (training + inference)
+## 📂 Project Structure
 
-During training (see `notebooks/model_training.ipynb`), text is cleaned before vectorization. Typical steps used in this project:
-
-- **Lowercasing**
-- **Whitespace normalization** (remove extra spaces/newlines)
-- **Noise removal** (basic punctuation/special-character cleanup depending on dataset)
-
-The trained **TF‑IDF vectorizer** (`model/tfidf_vectorizer.pkl`) must be used at inference time to transform user input in the same way training features were created.
-
-## How deployment works
-
-- The Flask app (`app.py`) loads:
-  - `model/svc.pkl`
-  - `model/tfidf_vectorizer.pkl`
-- It transforms the user text using TF‑IDF and predicts a label with the SVC model.
-- Docker runs the app with **gunicorn** and binds to **port 7860** (or `$PORT` if provided by the host).
-
-=======
->>>>>>> d6832e31e439072de081850002c54f6902723475
-## Tech Stack
-
-- **Backend**: Flask (Python)
-- **ML / NLP**: scikit-learn, numpy, joblib, TF-IDF + SVC
-- **Templates / Static**: Jinja2, HTML, CSS
-- **Serving**: gunicorn inside a Docker container
-
-## Local Setup (Without Docker)
-
-1. **Create and activate a virtual environment** (optional but recommended).
-2. **Install dependencies**:
-
-```bash
-pip install -r requirements.txt
+```text
+├── app.py                # Flask application entry point
+├── model/                # Serialized model artifacts
+│   ├── svc.pkl           # Trained SVC Model
+│   └── tfidf_vectorizer.pkl
+├── notebooks/            # Research & Development
+│   └── model_training.ipynb
+├── static/               # CSS & UI styling
+├── templates/            # HTML frontend
+├── Dockerfile            # Containerization instructions
+└── requirements.txt      # Project dependencies
 ```
 
-3. **Run the app**:
+---
 
+## 💻 Local Development
+
+### Using Python
+1. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. **Run App:**
+   ```bash
+   python app.py
+   ```
+3. **Access:** Open `http://127.0.0.1:7860`
+
+### Using Docker
 ```bash
-python app.py
-```
-
-<<<<<<< HEAD
-4. Open `http://127.0.0.1:7860` in your browser.
-=======
-4. Open `http://127.0.0.1:5000` in your browser.
->>>>>>> d6832e31e439072de081850002c54f6902723475
-
-## Docker Usage
-
-1. **Build the image** (from the project root):
-
-```bash
+# Build the image
 docker build -t text-detection-app .
-```
 
-2. **Run the container**:
-
-```bash
-<<<<<<< HEAD
+# Run the container
 docker run -p 7860:7860 text-detection-app
 ```
 
-3. Open `http://127.0.0.1:7860` and use the web UI to test the text detection model.
-=======
-docker run -p 5000:5000 text-detection-app
-```
+---
 
-3. Open `http://127.0.0.1:5000` and use the web UI to test the text detection model.
->>>>>>> d6832e31e439072de081850002c54f6902723475
+## ⚖️ Classification Labels
+The model categorizes input into three distinct buckets:
+* **Hate Speech:** Discriminatory language targeting protected groups.
+* **Offensive Language:** Profanity or derogatory terms without specific hate intent.
+* **Neither:** Clean, neutral, or positive text.
 
-##### Live at :
-
-  https://zainch12.pythonanywhere.com/
-
-<<<<<<< HEAD
-##### Live demo (Hugging Face Spaces):
-
-  https://huggingface.co/spaces/Zainch032/Text-Detection
-
-
-#### Folder Structure :
-    
-    ├── app.py
-    ├── model/
-    │   ├── svc.pkl
-    │   └── tfidf_vectorizer.pkl
-    ├── static/
-    │   └── style.css
-    ├── templates/
-    │   └── index.html
-    ├── requirements.txt
-    ├── Dockerfile
-    ├── notebooks/
-    │   └── model_training.ipynb
-    └── data/  (ignored by git)
-=======
-
-#### Folder Structure :
-    
-    ├── app/                       
-│   ├── model/                   
-│   │   ├── svc.pkl           
-│   │   └── tfidf_vectorizer.pkl 
-│   ├── static/styles.css     
-│   ├── templates/index.html    
-│   ├── requirements.txt       
-│   └── app.py                 
-├── data/                      
-│   ├── dataset.csv            
-│   └── training_data.csv     
-├── notebooks/                  
-│   └── model_training.ipynb   
-└── deployment_link
->>>>>>> d6832e31e439072de081850002c54f6902723475
