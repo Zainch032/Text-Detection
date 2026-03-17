@@ -30,5 +30,9 @@ def predict():
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     port = int(os.getenv("PORT", "7860"))
     app.run(host="0.0.0.0", port=port, debug=True)
+=======
+    app.run(debug=True)
+>>>>>>> d6832e31e439072de081850002c54f6902723475
