@@ -4,6 +4,8 @@
 
 # Local-only script
 upload.py
+check.py
+__init__.py
 
 # Python bytecode / caches
 __pycache__/
